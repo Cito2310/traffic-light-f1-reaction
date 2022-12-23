@@ -1,7 +1,9 @@
 import { useState } from "react"
+import { TrafficLight } from "./traffic-light/TrafficLight";
+
+import "./config.scss"
 
 export const App = () => {
-    // const [statusApp, setStatusApp] = useState<string | number>("Ready");
     type TStatusApp = "Init Timer" | "Click Now" | "Countdown Active";
 
     const [statusApp, setStatusApp] = useState<TStatusApp>("Init Timer");
@@ -43,10 +45,11 @@ export const App = () => {
 
     return (
         <div className="App">
-            <h1>{statusApp}</h1>
-            <h2>timer {stateCountdown}</h2>
-            <h3>time {time}</h3>
-            <button onClick={onClick}>Click here</button>
+            <TrafficLight/>
+            {/* <h1>{statusApp}</h1> */}
+            {/* <h2>timer {stateCountdown}</h2> */}
+            {/* <h3>time {time}</h3> */}
+            {/* <button onClick={onClick}>Click here</button> */}
         </div>
     )
 }
