@@ -3,6 +3,8 @@ import { TrafficLight } from "./traffic-light/TrafficLight";
 
 import "./config.scss"
 import { countDownTraffic } from './helpers/countDownTraffic';
+import { TapScreen } from "./tap-screen/TapScreen";
+import { onTap } from './helpers/onTap';
 
 export type TStatusApp = "Init Timer" | "Click Now" | "Countdown Active";
 export const App = () => {
@@ -11,22 +13,8 @@ export const App = () => {
     const [stateCountdown, setStateCountdown] = useState(0);
     const [time, setTime] = useState(0);
 
-    const onClick =  () => {
-        switch (statusApp) {
-            case "Init Timer":
-                countDownTraffic( setStatusApp, setStateCountdown, setTime );
-                break;
-
-            case "Countdown Active":
-                
-                break;
-
-            case "Click Now":
-                setTime( new Date().getTime() - time );
-                setStatusApp("Init Timer");
-                break;
-        }
-    }
+    const onClick =  () => onTap(statusApp, setStatusApp, setStateCountdown, setTime, time)
+    
 
     return (
         <div className="App">
@@ -34,7 +22,8 @@ export const App = () => {
             {/* <h1>{statusApp}</h1> */}
             {/* <h2>timer {stateCountdown}</h2> */}
             {/* <h3>time {time}</h3> */}
-            <button onClick={onClick}>Click here</button>
+            <TapScreen onClick={onClick}/>
+            {/* <button onClick={onClick}>Click here</button> */}
         </div>
     )
 }
