@@ -1,42 +1,19 @@
 import "./traffic-light.scss"
 
-export const TrafficLight = () => {
+import { TrafficLightColumn } from './TrafficLightColumn';
+
+interface props {
+    stateCountdown: number
+}
+
+export const TrafficLight = ({ stateCountdown }: props) => {
     return (
         <div id="traffic-light-container">
-            <div className="traffic-light-column">
-                <i className="fa-solid fa-circle circle-light green-light-off" />
-                <i className="fa-solid fa-circle circle-light yellow-light-off" />
-                <i className="fa-solid fa-circle circle-light red-light" />
-                <i className="fa-solid fa-circle circle-light red-light" />
-            </div>
-
-            <div className="traffic-light-column">
-                <i className="fa-solid fa-circle circle-light green-light-off" />
-                <i className="fa-solid fa-circle circle-light yellow-light-off" />
-                <i className="fa-solid fa-circle circle-light red-light" />
-                <i className="fa-solid fa-circle circle-light red-light" />
-            </div>
-
-            <div className="traffic-light-column">
-                <i className="fa-solid fa-circle circle-light green-light-off" />
-                <i className="fa-solid fa-circle circle-light yellow-light-off" />
-                <i className="fa-solid fa-circle circle-light red-light" />
-                <i className="fa-solid fa-circle circle-light red-light" />
-            </div>
-
-            <div className="traffic-light-column">
-                <i className="fa-solid fa-circle circle-light green-light-off" />
-                <i className="fa-solid fa-circle circle-light yellow-light-off" />
-                <i className="fa-solid fa-circle circle-light red-light" />
-                <i className="fa-solid fa-circle circle-light red-light" />
-            </div>
-
-            <div className="traffic-light-column">
-                <i className="fa-solid fa-circle circle-light green-light-off" />
-                <i className="fa-solid fa-circle circle-light yellow-light-off" />
-                <i className="fa-solid fa-circle circle-light red-light" />
-                <i className="fa-solid fa-circle circle-light red-light" />
-            </div>
+            <TrafficLightColumn stateCountdown={stateCountdown} lightNumber={1} />
+            <TrafficLightColumn stateCountdown={stateCountdown} lightNumber={2} />
+            <TrafficLightColumn stateCountdown={stateCountdown} lightNumber={3} />
+            <TrafficLightColumn stateCountdown={stateCountdown} lightNumber={4} />
+            <TrafficLightColumn stateCountdown={stateCountdown} lightNumber={5} />
         </div>  
     )
 }

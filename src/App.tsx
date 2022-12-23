@@ -2,9 +2,10 @@ import { useState } from "react"
 import { TrafficLight } from "./traffic-light/TrafficLight";
 
 import "./config.scss"
+import { countDownTraffic } from './helpers/countDownTraffic';
 
+export type TStatusApp = "Init Timer" | "Click Now" | "Countdown Active";
 export const App = () => {
-    type TStatusApp = "Init Timer" | "Click Now" | "Countdown Active";
 
     const [statusApp, setStatusApp] = useState<TStatusApp>("Init Timer");
     const [stateCountdown, setStateCountdown] = useState(0);
@@ -13,23 +14,7 @@ export const App = () => {
     const onClick =  () => {
         switch (statusApp) {
             case "Init Timer":
-                let currentTimer = 1;
-                setStatusApp("Countdown Active");
-                setStateCountdown(currentTimer);
-                const interval = setInterval(() => {
-                    currentTimer++;
-                    setStateCountdown(currentTimer);
-        
-                    if (currentTimer === 5) {
-                        const randomTimer = Math.round( Math.random() * (3000 - 200) + 200 );
-                        setTimeout(()=>{
-                            setStatusApp("Click Now");
-                            setTime(new Date().getTime());
-                        }, randomTimer)
-                        return clearInterval( interval );
-                    }
-                }, 1000) 
-                
+                countDownTraffic( setStatusApp, setStateCountdown, setTime );
                 break;
 
             case "Countdown Active":
@@ -45,11 +30,11 @@ export const App = () => {
 
     return (
         <div className="App">
-            <TrafficLight/>
+            <TrafficLight stateCountdown={stateCountdown}/>
             {/* <h1>{statusApp}</h1> */}
             {/* <h2>timer {stateCountdown}</h2> */}
             {/* <h3>time {time}</h3> */}
-            {/* <button onClick={onClick}>Click here</button> */}
+            <button onClick={onClick}>Click here</button>
         </div>
     )
 }
