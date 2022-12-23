@@ -1,5 +1,9 @@
 @use "../colors";
 
+#section-traffic-light {
+    display: flex;
+}
+
 #traffic-light-container {
     margin: auto;
     display: flex;

@@ -8,7 +8,7 @@ interface props {
 
 export const TrafficLight = ({ stateCountdown }: props) => {
     return (
-        <section id="scetion-traffic-light">
+        <section id="section-traffic-light">
             <div id="traffic-light-container">
                 <TrafficLightColumn stateCountdown={stateCountdown} lightNumber={1} />
                 <TrafficLightColumn stateCountdown={stateCountdown} lightNumber={2} />
