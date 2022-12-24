@@ -13,14 +13,19 @@ export const SectionText = ({ statusApp, time }: props) => {
         <section id="section-text">
             <h2>
                 {
-                    statusApp === "Init Timer" && time.currentTime ? time.currentTime
+                    statusApp === "Init Timer" && time.currentTime ? time.currentTime + "ms"
                     : statusApp === "Init Timer" ? "Tap to start countdown"
                     : statusApp === "Countdown Active" ? "Await"
                     : statusApp === "Too Soon" ? "Too soon"
                     : statusApp === "Click Now" ? "-" : ""
                 }
             </h2>
-            <h3>Title</h3>
+
+            {
+                statusApp === "Init Timer" && time.currentTime
+                ? <h3><i className="fa-solid fa-arrow-rotate-left"/> Tap to restart</h3>
+                : null
+            }
         </section>
     )
 }
