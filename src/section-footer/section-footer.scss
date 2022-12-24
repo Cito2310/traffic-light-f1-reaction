@@ -1,0 +1,10 @@
+#section-footer {
+    display: flex;
+    justify-content: center;
+    
+    p, a {all:unset};
+
+    .item-footer {
+        margin: 0 0.8em;
+    }
+}
