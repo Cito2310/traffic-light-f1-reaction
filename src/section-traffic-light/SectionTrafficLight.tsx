@@ -6,7 +6,7 @@ interface props {
     stateCountdown: number
 }
 
-export const TrafficLight = ({ stateCountdown }: props) => {
+export const SectionTrafficLight = ({ stateCountdown }: props) => {
     return (
         <section id="section-traffic-light">
             <div id="traffic-light-container">

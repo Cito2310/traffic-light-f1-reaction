@@ -1,9 +1,10 @@
-import { TStatusApp } from '../App';
+import { ITime } from '../interface/ITime';
+import { TStatusApp } from '../interface/TStatusApp';
 
 export const countDownTraffic = (
     setStatusApp: React.Dispatch<React.SetStateAction<TStatusApp>>,
     setStateCountdown: React.Dispatch<React.SetStateAction<number>>,
-    setTime: React.Dispatch<React.SetStateAction<number>>,
+    setTime: React.Dispatch<React.SetStateAction<ITime>>,
 ) => {
     let currentTimer = 1;
     setStatusApp("Countdown Active");
@@ -16,7 +17,10 @@ export const countDownTraffic = (
             const randomTimer = Math.round( Math.random() * (3000 - 200) + 200 );
             setTimeout(()=>{
                 setStatusApp("Click Now");
-                setTime(new Date().getTime());
+                setTime({
+                    firstTime: new Date().getTime(),
+                    currentTime: 0,
+                });
                 setStateCountdown(0)
             }, randomTimer)
             return clearInterval( interval );

@@ -1,0 +1,1 @@
+export type TStatusApp = "Init Timer" | "Click Now" | "Countdown Active" | "Too Soon";

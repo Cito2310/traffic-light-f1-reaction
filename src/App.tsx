@@ -1,31 +1,31 @@
 import { useState } from "react"
-import { TrafficLight } from "./traffic-light/TrafficLight";
 
-import "./config.scss"
-import { countDownTraffic } from './helpers/countDownTraffic';
-import { TapScreen } from "./tap-screen/TapScreen";
 import { onTap } from './helpers/onTap';
+import { SectionTrafficLight } from "./section-traffic-light/SectionTrafficLight";
 import { SectionFooter } from "./section-footer/SectionFooter";
+import { SectionText } from "./section-text/SectionText";
+import { TapScreen } from "./tap-screen/TapScreen";
 
-export type TStatusApp = "Init Timer" | "Click Now" | "Countdown Active";
+import { TStatusApp } from './interface/TStatusApp';
+import { ITime } from './interface/ITime';
+
+import "./config.scss";
+
 export const App = () => {
 
     const [statusApp, setStatusApp] = useState<TStatusApp>("Init Timer");
     const [stateCountdown, setStateCountdown] = useState(0);
-    const [time, setTime] = useState(0);
+    const [time, setTime] = useState<ITime>({} as ITime);
 
     const onClick =  () => onTap(statusApp, setStatusApp, setStateCountdown, setTime, time)
     
 
     return (
         <div className="App">
-            <TrafficLight stateCountdown={stateCountdown}/>
-            {/* <h1>{statusApp}</h1> */}
-            {/* <h2>timer {stateCountdown}</h2> */}
+            <SectionTrafficLight stateCountdown={stateCountdown}/>
+            <SectionText statusApp={statusApp} time={time}/>
             <SectionFooter/>
-            {/* <h3>time {time}</h3> */}
             <TapScreen onClick={onClick}/>
-            {/* <button onClick={onClick}>Click here</button> */}
         </div>
     )
 }
