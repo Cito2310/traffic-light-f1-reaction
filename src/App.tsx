@@ -1,31 +1,54 @@
-import { useState } from "react"
-
-import { onTap } from './helpers/onTap';
-import { SectionTrafficLight } from "./section-traffic-light/SectionTrafficLight";
-import { SectionFooter } from "./section-footer/SectionFooter";
-import { SectionText } from "./section-text/SectionText";
-import { TapScreen } from "./tap-screen/TapScreen";
-
-import { TStatusApp } from './interface/TStatusApp';
-import { ITime } from './interface/ITime';
-
 import "./config.scss";
+import { useContext } from 'react';
+import { contextApp } from "./provider/ProviderApp";
 
 export const App = () => {
+    const { countdown, state, dispatch } = useContext(contextApp)
+    const { currentSecond, currentStatus, stopwatch } = state;
 
-    const [statusApp, setStatusApp] = useState<TStatusApp>("Init Timer");
-    const [stateCountdown, setStateCountdown] = useState(0);
-    const [time, setTime] = useState<ITime>({} as ITime);
+    const onInitTimer = () => {
+        switch ( currentStatus ) {
+            case "available-reset":
+            case "init-timer":
+            case "too-soon":
+                countdown.start(
+                    ()=>{ 
+                        dispatch({type: "STATUS change available-click"});
+                        dispatch({type: "CURRENT-SECOND change", payload: 0});
+                    },
+                    ()=>{ dispatch({type:"CURRENT-SECOND change", payload: 6-countdown.currentSecond}) },
+                    ()=>{
+                        dispatch({type:"STATUS change countdown-active"});
+                        dispatch({type:"CURRENT-SECOND change", payload: 1});
+                    },
+                );
+                break;
 
-    const onClick =  () => onTap(statusApp, setStatusApp, setStateCountdown, setTime, time)
-    
+            case "available-click":
+                countdown.reset();
+                dispatch({type: "STATUS change available-reset"})
+                dispatch({type: "STOPWATCH change millisecond", payload: new Date().getTime()});
+                break;
+                
+            case "countdown-active":
+                countdown.reset();
+                dispatch({type: "CURRENT-SECOND change", payload: 0});
+                dispatch({type:"STATUS change too-soon"});
+                break;
+        }
+    }
+
+    const onResetTimer = () => {
+        countdown.reset();
+    }
 
     return (
         <div className="App">
-            <SectionTrafficLight stateCountdown={stateCountdown}/>
-            <SectionText statusApp={statusApp} time={time}/>
-            <SectionFooter/>
-            <TapScreen onClick={onClick}/>
+            <h1>{currentStatus}</h1>
+            <h2>{currentSecond}</h2>
+            <h3>{stopwatch}</h3>
+
+            <button onClick={onInitTimer}>Iniciar timer</button>
         </div>
     )
 }
