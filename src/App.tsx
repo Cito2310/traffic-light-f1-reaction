@@ -1,6 +1,9 @@
 import "./config.scss";
 import { useContext } from 'react';
 import { contextApp } from "./provider/ProviderApp";
+import { SectionTitle } from "./section-title/SectionTitle";
+import { SectionTrafficLight } from "./section-traffic-light/SectionTrafficLight";
+import { SectionText } from "./section-text/SectionText";
 
 export const App = () => {
     const { countdown, state, dispatch } = useContext(contextApp)
@@ -44,9 +47,9 @@ export const App = () => {
 
     return (
         <div className="App">
-            <h1>{currentStatus}</h1>
-            <h2>{currentSecond}</h2>
-            <h3>{stopwatch}</h3>
+            <SectionTitle/>
+            <SectionTrafficLight/>
+            <SectionText/>
 
             <button onClick={onInitTimer}>Iniciar timer</button>
         </div>

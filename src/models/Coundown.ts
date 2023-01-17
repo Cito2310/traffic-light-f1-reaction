@@ -25,7 +25,7 @@ export class Countdown {
             if ( this.currentSecond === 1 ) {
                 clearInterval(this.interval);
                 const randomTimer = Math.round( Math.random() * (3000-200) - 200 )
-                setTimeout(()=>{ handlerTimeout() }, randomTimer)
+                this.timeout = setTimeout(()=>{ handlerTimeout() }, randomTimer)
             }
 
         }, 1000)
