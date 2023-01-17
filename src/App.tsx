@@ -7,7 +7,7 @@ import { SectionTrafficLight } from "./section-traffic-light/SectionTrafficLight
 import { SectionText } from "./section-text/SectionText";
 
 import "./config.scss";
-
+import "./responsive.scss"
 
 export const App = () => {
     const { countdown, state, dispatch } = useContext(contextApp)
