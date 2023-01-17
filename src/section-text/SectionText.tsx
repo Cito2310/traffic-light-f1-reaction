@@ -1,5 +1,8 @@
 import { useContext } from 'react';
 import { contextApp } from '../provider/ProviderApp';
+
+import "./section-text.scss"
+
 export const SectionText = () => {
     const { state } = useContext(contextApp);
     const { currentStatus, stopwatch } = state;
@@ -14,12 +17,13 @@ export const SectionText = () => {
                 : currentStatus === "too-soon" ? "Too soon" : "Error client"
             }</h2>
 
-            <h3>{
-                currentStatus === "available-reset" 
-                || currentStatus === "too-soon" 
-                ?  "Click to reset"
+            {
+                currentStatus === "available-reset" || currentStatus === "too-soon" 
+                ? <h3>
+                    <i className="fa-solid fa-arrow-rotate-left"/> Tap to reset
+                </h3>
                 : null
-            }</h3>
+            }
         </section>
     )
 }

@@ -1,9 +1,13 @@
-import "./config.scss";
 import { useContext } from 'react';
+
 import { contextApp } from "./provider/ProviderApp";
+
 import { SectionTitle } from "./section-title/SectionTitle";
 import { SectionTrafficLight } from "./section-traffic-light/SectionTrafficLight";
 import { SectionText } from "./section-text/SectionText";
+
+import "./config.scss";
+
 
 export const App = () => {
     const { countdown, state, dispatch } = useContext(contextApp)
@@ -41,17 +45,13 @@ export const App = () => {
         }
     }
 
-    const onResetTimer = () => {
-        countdown.reset();
-    }
-
     return (
         <div className="App">
             <SectionTitle/>
             <SectionTrafficLight/>
             <SectionText/>
 
-            <button onClick={onInitTimer}>Iniciar timer</button>
+            <button id='tap-screen' onClick={onInitTimer}/>
         </div>
     )
 }
